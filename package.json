@@ -16,6 +16,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sharp": "^0.34.5",
+    "simple-icons": "^16.3.0",
     "zustand": "^5.0.9"
   },
   "devDependencies": {

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://pixel.payangar.io
+
+# Sitemaps
+Sitemap: https://pixel.payangar.io/sitemap.xml
