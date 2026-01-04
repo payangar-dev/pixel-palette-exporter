@@ -12,11 +12,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://pixel.payangar.io"),
   title: {
-    default: "Pixel Palette Exporter - Extract Colors from Pixel Art",
+    default: "Pixel Palette Exporter - Extract & Replace Colors in Pixel Art",
     template: "%s | Pixel Palette Exporter",
   },
   description:
-    "Free online tool to extract and manage color palettes from pixel art images. Export palettes in GPL (GIMP), KPL (Krita), and JSON formats. Perfect for game developers and pixel artists.",
+    "Free online tool to extract and replace color palettes in pixel art images. Export palettes in GPL (GIMP), KPL (Krita), and JSON formats. Intelligent color mapping with real-time preview. Perfect for game developers and pixel artists.",
   keywords: [
     "pixel art",
     "color palette",
@@ -30,6 +30,11 @@ export const metadata: Metadata = {
     "pixel art colors",
     "palette export",
     "color management",
+    "color replacement",
+    "recolor pixel art",
+    "palette swap",
+    "color mapping",
+    "palette conversion",
   ],
   authors: [{ name: "Payangar", url: "https://github.com/payangar-dev" }],
   creator: "Payangar",
@@ -38,16 +43,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://pixel.payangar.io",
-    title: "Pixel Palette Exporter - Extract Colors from Pixel Art",
+    title: "Pixel Palette Exporter - Extract & Replace Colors in Pixel Art",
     description:
-      "Free online tool to extract and manage color palettes from pixel art images. Export in multiple formats.",
+      "Free online tool to extract and replace color palettes in pixel art images. Intelligent color mapping with real-time preview. Export in multiple formats.",
     siteName: "Pixel Palette Exporter",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pixel Palette Exporter - Extract Colors from Pixel Art",
+    title: "Pixel Palette Exporter - Extract & Replace Colors in Pixel Art",
     description:
-      "Free online tool to extract and manage color palettes from pixel art images. Export in multiple formats.",
+      "Free online tool to extract and replace color palettes in pixel art images. Intelligent color mapping with real-time preview. Export in multiple formats.",
     creator: "@payangar",
   },
   robots: {

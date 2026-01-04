@@ -9,6 +9,15 @@ interface ImageState {
   isGeneratingPalette: boolean;
   hoveredColor: string | null;
   selectedColors: string[];
+  // Color replacement state
+  sourceImageData: string | null;
+  sourceFileName: string | null;
+  sourcePalette: string[] | null;
+  targetPalette: string[] | null;
+  targetPaletteFileName: string | null;
+  colorMapping: Record<string, string> | null;
+  replacedImageData: string | null;
+  isReplacingColors: boolean;
   setImage: (fileName: string, imageData: string) => void;
   resetImage: () => void;
   setIsDragging: (isDragging: boolean) => void;
@@ -20,6 +29,15 @@ interface ImageState {
   toggleColorSelection: (color: string) => void;
   selectColorRange: (fromColor: string, toColor: string) => void;
   removeSelectedColors: () => void;
+  // Color replacement actions
+  setSourceImage: (fileName: string, imageData: string) => void;
+  setSourcePalette: (palette: string[]) => void;
+  setTargetPalette: (palette: string[], fileName?: string) => void;
+  setColorMapping: (mapping: Record<string, string>) => void;
+  updateColorMapping: (sourceColor: string, targetColor: string) => void;
+  setReplacedImageData: (imageData: string | null) => void;
+  setIsReplacingColors: (isReplacing: boolean) => void;
+  resetReplacement: () => void;
 }
 
 export const useImageStore = create<ImageState>((set) => ({
@@ -31,6 +49,15 @@ export const useImageStore = create<ImageState>((set) => ({
   isGeneratingPalette: false,
   hoveredColor: null,
   selectedColors: [],
+  // Color replacement state
+  sourceImageData: null,
+  sourceFileName: null,
+  sourcePalette: null,
+  targetPalette: null,
+  targetPaletteFileName: null,
+  colorMapping: null,
+  replacedImageData: null,
+  isReplacingColors: false,
   setImage: (fileName, imageData) =>
     set({ fileName, imageData, error: null, palette: null }),
   resetImage: () =>
@@ -86,5 +113,33 @@ export const useImageStore = create<ImageState>((set) => ({
         selectedColors: [],
         hoveredColor: newHoveredColor,
       };
+    }),
+  // Color replacement actions
+  setSourceImage: (fileName, imageData) =>
+    set({ sourceFileName: fileName, sourceImageData: imageData, error: null }),
+  setSourcePalette: (palette) => set({ sourcePalette: palette }),
+  setTargetPalette: (palette, fileName) =>
+    set({ targetPalette: palette, targetPaletteFileName: fileName || null }),
+  setColorMapping: (mapping) => set({ colorMapping: mapping }),
+  updateColorMapping: (sourceColor, targetColor) =>
+    set((state) => ({
+      colorMapping: {
+        ...(state.colorMapping || {}),
+        [sourceColor]: targetColor,
+      },
+    })),
+  setReplacedImageData: (imageData) => set({ replacedImageData: imageData }),
+  setIsReplacingColors: (isReplacing) =>
+    set({ isReplacingColors: isReplacing }),
+  resetReplacement: () =>
+    set({
+      sourceImageData: null,
+      sourceFileName: null,
+      sourcePalette: null,
+      targetPalette: null,
+      targetPaletteFileName: null,
+      colorMapping: null,
+      replacedImageData: null,
+      isReplacingColors: false,
     }),
 }));

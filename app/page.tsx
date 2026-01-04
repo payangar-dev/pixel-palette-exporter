@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import ImageUploader from "./components/ImageUploader";
 import ImagePreview from "./components/ImagePreview";
 import PaletteDisplay from "./components/PaletteDisplay";
+import ColorReplacementTab from "./components/ColorReplacementTab";
 import { useImageStore } from "./store/imageStore";
 import { Heart } from "lucide-react";
 import { siGithub } from "simple-icons";
 
 export default function Home() {
   const { imageData } = useImageStore();
+  const [activeTab, setActiveTab] = useState<"extract" | "replace">("extract");
 
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black">
@@ -23,15 +26,45 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Tabs */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex bg-white dark:bg-gray-800 rounded-lg p-1 shadow-md">
+            <button
+              onClick={() => setActiveTab("extract")}
+              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                activeTab === "extract"
+                  ? "bg-blue-500 text-white"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              }`}
+            >
+              Extract Palette
+            </button>
+            <button
+              onClick={() => setActiveTab("replace")}
+              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                activeTab === "replace"
+                  ? "bg-blue-500 text-white"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              }`}
+            >
+              Replace Colors
+            </button>
+          </div>
+        </div>
+
         {/* Main Content */}
         <div className="flex flex-col items-center justify-center gap-8">
-          {!imageData ? (
-            <ImageUploader />
+          {activeTab === "extract" ? (
+            !imageData ? (
+              <ImageUploader />
+            ) : (
+              <>
+                <ImagePreview />
+                <PaletteDisplay />
+              </>
+            )
           ) : (
-            <>
-              <ImagePreview />
-              <PaletteDisplay />
-            </>
+            <ColorReplacementTab />
           )}
         </div>
       </main>
@@ -45,7 +78,7 @@ export default function Home() {
               href="https://ko-fi.com/payangar"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-full font-medium transition-all transform hover:scale-105 shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white rounded-full font-medium transition-all transform hover:scale-105 shadow-lg"
             >
               <Heart className="w-5 h-5 fill-white" />
               Support me on Ko-fi
